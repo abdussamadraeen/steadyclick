@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      background-color: #0b0e14;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .badge-sub {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #a855f7;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #94a3b8;
+    }
+
+    .browser-frame {
+      flex: 1;
+      background: #141720;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .browser-top {
+      height: 40px;
+      background: #1c202a;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+    }
+
+    .dots { display: flex; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .d-red { background: #ff5f56; }
+    .d-yellow { background: #ffbd2e; }
+    .d-green { background: #27c93f; }
+
+    .url-bar {
+      flex: 1;
+      max-width: 480px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 6px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .page-content {
+      flex: 1;
+      padding: 50px 60px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+    }
+
+    .card-demo {
+      flex: 1;
+      background: #1c212c;
+      border-radius: 12px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .reading-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .clarity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(52, 199, 89, 0.15);
+      color: #34c759;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .floating-popup {
+      width: 320px;
+      background: #1c1c1e;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      padding: 16px;
+    }
+
+    .fp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fp-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .fp-status { font-size: 11px; color: #10b981; font-weight: 600; }
+
+    .fp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fp-row:last-child { border-bottom: none; }
+    .fp-text-main { font-size: 13px; font-weight: 600; color: #fff; }
+    .fp-text-sub { font-size: 11px; color: #8e8e93; }
+
+    .fp-switch-on {
+      width: 38px;
+      height: 22px;
+      border-radius: 22px;
+      background: #34c759;
+      position: relative;
+    }
+
+    .fp-switch-on::after {
+      content: "";
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-header">
+    <div class="badge-sub">High Clarity & Sensory Calm</div>
+    <h1>Enhanced Contrast & Distraction-Free Browsing</h1>
+    <p class="subtitle">Sharpens low-contrast text and freezes aggressive flashing animations with a single toggle.</p>
+  </div>
+
+  <div class="browser-frame">
+    <div class="browser-top">
+      <div class="dots">
+        <div class="dot d-red"></div>
+        <div class="dot d-yellow"></div>
+        <div class="dot d-green"></div>
+      </div>
+      <div class="url-bar">https://news.journal.org/article/health</div>
+    </div>
+
+    <div class="page-content">
+      <div class="card-demo">
+        <div class="card-title">Cognitive Health & Focus</div>
+        <div class="reading-text">
+          Text contrast is automatically calibrated using psychometric luminance curves. Even in dark themes or on poorly designed pages, text is rendered with sharp, high-contrast clarity.
+        </div>
+        <div class="clarity-badge">
+          <span>✓</span> APCA Contrast Standard Satisfied
+        </div>
+      </div>
+
+      <div class="floating-popup">
+        <div class="fp-header">
+          <div class="fp-title">SteadyClick</div>
+          <div class="fp-status">Active</div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Enhanced Contrast</div>
+            <div class="fp-text-sub">Optimizes reading clarity</div>
+          </div>
+          <div class="fp-switch-on"></div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Calm Display</div>
+            <div class="fp-text-sub">Halts flashing banners</div>
+          </div>
+          <div class="fp-switch-on"></div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Plain Language</div>
+            <div class="fp-text-sub">Identifies dense jargon</div>
+          </div>
+          <div class="fp-switch-on"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

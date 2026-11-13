@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      background-color: #0b0e14;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Banner */
+    .top-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .badge-sub {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #94a3b8;
+    }
+
+    /* Main Workspace Simulation */
+    .browser-frame {
+      flex: 1;
+      background: #141720;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .browser-top {
+      height: 40px;
+      background: #1c202a;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .d-red { background: #ff5f56; }
+    .d-yellow { background: #ffbd2e; }
+    .d-green { background: #27c93f; }
+
+    .url-bar {
+      flex: 1;
+      max-width: 480px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 6px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    /* Page Content Simulation */
+    .page-content {
+      flex: 1;
+      padding: 50px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .form-card {
+      max-width: 520px;
+      background: #1c212c;
+      border-radius: 12px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .form-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .form-desc {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      position: relative;
+    }
+
+    .mock-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+    }
+
+    .btn-primary {
+      background: #0071e3;
+      color: #ffffff;
+      outline: 2.5px solid #0071e3 !important;
+      outline-offset: 3px !important;
+      position: relative;
+    }
+
+    /* Magnetic Ring Overlay Simulation */
+    .magnetic-ring {
+      position: absolute;
+      top: -16px;
+      left: 100px;
+      width: 170px;
+      height: 75px;
+      border-radius: 40px;
+      border: 2px dashed rgba(56, 189, 248, 0.7);
+      background: rgba(56, 189, 248, 0.08);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pointer-mock {
+      position: absolute;
+      top: -10px;
+      left: 40px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 12px #38bdf8;
+    }
+
+    .callout-box {
+      position: absolute;
+      top: -45px;
+      left: 70px;
+      background: #0071e3;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Floating Settings Panel */
+    .floating-popup {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      width: 320px;
+      background: #1c1c1e;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      padding: 16px;
+    }
+
+    .fp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fp-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .fp-status {
+      font-size: 11px;
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .fp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fp-row:last-child {
+      border-bottom: none;
+    }
+
+    .fp-text-main {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .fp-text-sub {
+      font-size: 11px;
+      color: #8e8e93;
+    }
+
+    .fp-switch {
+      width: 38px;
+      height: 22px;
+      border-radius: 22px;
+      background: #34c759;
+      position: relative;
+    }
+
+    .fp-switch::after {
+      content: "";
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-header">
+    <div class="badge-sub">Intelligent Target Capture</div>
+    <h1>Steady Pointer & Magnetic Clicks for Every Website</h1>
+    <p class="subtitle">Dampens hand tremors and mathematically snaps clicks onto buttons so you never miss.</p>
+  </div>
+
+  <div class="browser-frame">
+    <div class="browser-top">
+      <div class="dots">
+        <div class="dot d-red"></div>
+        <div class="dot d-yellow"></div>
+        <div class="dot d-green"></div>
+      </div>
+      <div class="url-bar">https://checkout.portal.com/confirm</div>
+    </div>
+
+    <div class="page-content">
+      <div class="form-card">
+        <div class="form-title">Confirm Your Transaction</div>
+        <div class="form-desc">Review your order details below and proceed to complete your transaction securely.</div>
+        
+        <div class="button-row">
+          <button class="mock-btn btn-secondary">Cancel</button>
+          
+          <div style="position: relative;">
+            <button class="mock-btn btn-primary">Confirm & Pay</button>
+            <div class="magnetic-ring">
+              <div class="pointer-mock"></div>
+              <div class="callout-box">🧲 Magnetic Lock Active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Extension Popup Mockup -->
+      <div class="floating-popup">
+        <div class="fp-header">
+          <div class="fp-title">SteadyClick</div>
+          <div class="fp-status">Active</div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Steady Pointer</div>
+            <div class="fp-text-sub">Dampens tremors & shakes</div>
+          </div>
+          <div class="fp-switch"></div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Magnetic Snap</div>
+            <div class="fp-text-sub">Assists clicks onto buttons</div>
+          </div>
+          <div class="fp-switch"></div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Enhanced Contrast</div>
+            <div class="fp-text-sub">Optimizes reading clarity</div>
+          </div>
+          <div class="fp-switch" style="background: #39393d;"><div style="position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff;"></div></div>
+        </div>
+
+        <div class="fp-row">
+          <div>
+            <div class="fp-text-main">Calm Display</div>
+            <div class="fp-text-sub">Halts flashing banners</div>
+          </div>
+          <div class="fp-switch" style="background: #39393d;"><div style="position: absolute; left: 2px; top: 2px; width: 18px; height: 18px; border-radius: 50%; background: #fff;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
