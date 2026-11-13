@@ -1,0 +1,6 @@
+# Rust build target
+/target/
+
+# OS metadata
+.DS_Store
+Thumbs.db

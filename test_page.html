@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SteadyClick Verification Lab</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #1d1d1f;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: #86868b;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .test-card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      background: #fbfbfd;
+    }
+
+    .test-desc {
+      font-size: 13px;
+      color: #515154;
+      margin-bottom: 14px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .small-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #0071e3;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .small-btn:hover {
+      background: #0077ed;
+    }
+
+    .result-log {
+      font-size: 13px;
+      font-weight: 500;
+      color: #0071e3;
+      margin-top: 10px;
+    }
+
+    .contrast-sample-1 {
+      color: #b0b0b0;
+      background-color: #ffffff;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #eeeeee;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .contrast-sample-2 {
+      color: #444444;
+      background-color: #121212;
+      padding: 12px;
+      font-size: 14px;
+      border-radius: 6px;
+    }
+
+    .pulse-element {
+      width: 120px;
+      height: 36px;
+      background: #34c759;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      animation: gentle-pulse 0.6s infinite alternate ease-in-out;
+    }
+
+    @keyframes gentle-pulse {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0.4; transform: scale(1.08); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SteadyClick Verification Lab</h1>
+  <div class="subtitle">System test bench for motor assistance, visual contrast, and sensory calm.</div>
+
+  <!-- Test 1: Motor & Magnetic Click -->
+  <div class="test-card">
+    <h2>1. Steady Pointer & Magnetic Click</h2>
+    <div class="test-desc">Move your cursor near these small buttons. SteadyClick dampens tremors and snaps the hit area directly onto the button.</div>
+    <div class="button-group">
+      <button class="small-btn" id="btnA">Action One</button>
+      <button class="small-btn" id="btnB">Action Two</button>
+      <button class="small-btn" id="btnC">Action Three</button>
+    </div>
+    <div id="clickStatus" class="result-log">No button clicked yet.</div>
+  </div>
+
+  <!-- Test 2: Contrast Boost -->
+  <div class="test-card">
+    <h2>2. Enhanced Contrast</h2>
+    <div class="test-desc">Toggle Enhanced Contrast in the popup to sharpen low-contrast text.</div>
+    <div class="contrast-sample-1">
+      Low-contrast sample: Light gray text on a white background.
+    </div>
+    <div class="contrast-sample-2">
+      Low-contrast sample: Dark gray text on an ultra-dark background.
+    </div>
+  </div>
+
+  <!-- Test 3: Calm Mode -->
+  <div class="test-card">
+    <h2>3. Calm Display</h2>
+    <div class="test-desc">Turn on Calm Display in the popup. The pulsing animation below will freeze instantly.</div>
+    <div class="pulse-element">Flashing Element</div>
+    <br>
+    <p>
+      The patient presented with hypercholesterolemia and cardiovascular atherosclerosis requiring clinical jurisprudence.
+    </p>
+  </div>
+
+  <script>
+    ['btnA', 'btnB', 'btnC'].forEach(id => {
+      document.getElementById(id).addEventListener('click', (e) => {
+        document.getElementById('clickStatus').textContent = `Success: Activated ${e.target.textContent}`;
+      });
+    });
+  </script>
+</body>
+</html>

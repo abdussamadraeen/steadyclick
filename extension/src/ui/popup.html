@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SteadyClick</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --card: #1c1c1e;
+      --card-separator: rgba(255, 255, 255, 0.08);
+      --label-primary: #ffffff;
+      --label-secondary: #8e8e93;
+      --label-tertiary: #636366;
+      --fill-tertiary: rgba(118, 118, 128, 0.24);
+      --switch-on: #34c759;
+      --switch-off: #39393d;
+      --accent: #0071e3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 320px;
+      background-color: var(--bg);
+      color: var(--label-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif;
+      padding: 16px;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+      color: var(--label-primary);
+    }
+
+    .header-status {
+      font-size: 12px;
+      color: var(--label-secondary);
+      font-weight: 400;
+    }
+
+    /* Apple Segmented Control */
+    .segmented-control {
+      display: flex;
+      background-color: var(--fill-tertiary);
+      border-radius: 9px;
+      padding: 2px;
+      margin-bottom: 14px;
+    }
+
+    .segment-option {
+      flex: 1;
+      text-align: center;
+      padding: 5px 0;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--label-secondary);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 7px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .segment-option.active {
+      background-color: #636366;
+      color: var(--label-primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Inset Grouped Section */
+    .group-section {
+      background-color: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .group-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      position: relative;
+    }
+
+    .group-row:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 14px;
+      right: 0;
+      height: 0.5px;
+      background-color: var(--card-separator);
+    }
+
+    .row-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      padding-right: 12px;
+    }
+
+    .row-title {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+      color: var(--label-primary);
+    }
+
+    .row-caption {
+      font-size: 11px;
+      color: var(--label-secondary);
+      line-height: 1.3;
+    }
+
+    /* Apple iOS Style Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--switch-off);
+      transition: background-color 0.25s ease;
+      border-radius: 24px;
+    }
+
+    .slider::before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 2px;
+      bottom: 2px;
+      background-color: #ffffff;
+      transition: transform 0.25s cubic-bezier(0.2, 0.85, 0.32, 1.2);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    input:checked + .slider {
+      background-color: var(--switch-on);
+    }
+
+    input:checked + .slider::before {
+      transform: translateX(16px);
+    }
+
+    /* Sub-row for Sensitivity */
+    .sub-row {
+      padding: 8px 14px 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .sub-row::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 14px;
+      right: 0;
+      height: 0.5px;
+      background-color: var(--card-separator);
+    }
+
+    .sub-row-label {
+      font-size: 11px;
+      color: var(--label-secondary);
+      font-weight: 500;
+    }
+
+    .sub-segmented {
+      display: flex;
+      background-color: var(--fill-tertiary);
+      border-radius: 7px;
+      padding: 2px;
+    }
+
+    .sub-btn {
+      border: none;
+      background: transparent;
+      color: var(--label-secondary);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .sub-btn.active {
+      background-color: #48484a;
+      color: var(--label-primary);
+    }
+
+    footer {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--label-tertiary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">SteadyClick</div>
+    <div class="header-status">Active</div>
+  </header>
+
+  <div class="segmented-control">
+    <button class="segment-option" id="presetMotor">Motor</button>
+    <button class="segment-option" id="presetReading">Reading</button>
+    <button class="segment-option" id="presetAll">All</button>
+  </div>
+
+  <div class="group-section">
+
+    <!-- Steady Pointer -->
+    <div class="group-row">
+      <div class="row-text">
+        <span class="row-title">Steady Pointer</span>
+        <span class="row-caption">Dampens hand tremors for precise control</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="motorEnabled" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Sensitivity Slider -->
+    <div class="sub-row">
+      <span class="sub-row-label">Damping</span>
+      <div class="sub-segmented" id="strengthGroup">
+        <button class="sub-btn" data-strength="gentle">Low</button>
+        <button class="sub-btn active" data-strength="balanced">Medium</button>
+        <button class="sub-btn" data-strength="strong">High</button>
+      </div>
+    </div>
+
+    <!-- Magnetic Snap -->
+    <div class="group-row">
+      <div class="row-text">
+        <span class="row-title">Magnetic Snap</span>
+        <span class="row-caption">Assists clicks onto nearby buttons</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="bubbleVisible" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- High Contrast -->
+    <div class="group-row">
+      <div class="row-text">
+        <span class="row-title">Enhanced Contrast</span>
+        <span class="row-caption">Optimizes text clarity for reading</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="contrastBoost">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Calm Mode -->
+    <div class="group-row">
+      <div class="row-text">
+        <span class="row-title">Calm Display</span>
+        <span class="row-caption">Halts flashing banners and autoplay</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="sensoryCalm">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Plain Words -->
+    <div class="group-row">
+      <div class="row-text">
+        <span class="row-title">Plain Language</span>
+        <span class="row-caption">Identifies dense technical terms</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="cognitiveGloss">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+  </div>
+
+  <footer>
+    Offline & Private
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

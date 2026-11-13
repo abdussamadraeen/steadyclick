@@ -1,0 +1,17 @@
+[package]
+name = "engine-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Centennial Accessibility Project"]
+description = "Deterministic, zero-dependency universal accessibility engine compiled to WebAssembly"
+license = "MIT OR Apache-2.0"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["std"]
+std = []
+
+[dependencies]
+# Zero external dependencies.

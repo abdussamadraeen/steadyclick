@@ -1,0 +1,46 @@
+/* Calm display overrides */
+body.steadyclick-sensory-calm *,
+body.steadyclick-sensory-calm *::before,
+body.steadyclick-sensory-calm *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+body.steadyclick-sensory-calm video[autoplay],
+body.steadyclick-sensory-calm audio[autoplay] {
+  autoplay: false !important;
+}
+
+/* Magnetic target active focus ring */
+.steadyclick-target-active {
+  outline: 2px solid #0071e3 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+  transition: outline 0.1s ease !important;
+}
+
+/* Magnetic indicator overlay */
+#steadyclick-bubble-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 2147483647;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 113, 227, 0.4);
+  background: rgba(0, 113, 227, 0.08);
+  transform: translate(-50%, -50%);
+  transition: width 0.06s ease-out, height 0.06s ease-out;
+  display: none;
+}
+
+/* High contrast text adjustment - pure typography, zero box distortion */
+.steadyclick-contrast-light {
+  color: #000000 !important;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3) !important;
+}
+
+.steadyclick-contrast-dark {
+  color: #ffffff !important;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.3) !important;
+}
