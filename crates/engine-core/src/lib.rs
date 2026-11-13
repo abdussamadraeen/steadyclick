@@ -1,7 +1,4 @@
-//! Centennial Accessibility Engine: Core
-//!
-//! A zero-dependency, mathematically verified accessibility engine
-//! designed for long-term generational permanence.
+//! SteadyClick Engine Core
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
